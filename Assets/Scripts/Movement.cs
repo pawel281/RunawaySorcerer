@@ -34,10 +34,10 @@ public class Movement : MonoBehaviour
 
     public void Turn(Vector3 viewDirection)
     {
-        if (viewDirection.sqrMagnitude > 0.1f)
+        if (viewDirection.sqrMagnitude > 0.3f)
         {
             var step = _turnHandSpeed * Time.deltaTime;
-            _handRoot.transform.rotation = Quaternion.RotateTowards( _handRoot.transform.rotation, Quaternion.LookRotation(viewDirection)*Quaternion.Euler(90,0,0), step);
+            _handRoot.transform.rotation = Quaternion.RotateTowards( _handRoot.transform.rotation, Quaternion.LookRotation(viewDirection.normalized)*Quaternion.Euler(90,0,0), step);
             _bodySprite.flipX = viewDirection.x < 0;
         }
     }

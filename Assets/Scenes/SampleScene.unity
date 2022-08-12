@@ -248,6 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 245010267}
   - component: {fileID: 245010268}
+  - component: {fileID: 245010269}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -282,7 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 245010269}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -300,6 +302,19 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!114 &245010269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245010266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417296ef6c555e84ab4cd3e2d06b32f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 963194227}
 --- !u!1 &298121611
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 298121614}
-  _camera: {fileID: 963194227}
 --- !u!114 &298121614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
-  _turnHandSpeed: 360
+  _turnHandSpeed: 720
   _handRoot: {fileID: 161029703}
   _bodySprite: {fileID: 179882382}
 --- !u!54 &298121615

@@ -4,9 +4,9 @@ using Zenject;
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField] private Movement _playerMovement;
-    [SerializeField] private Camera _camera;
+    private Camera _camera;
 
-
+    [Inject]
     private void Constructor(Camera camera)
     {
         _camera = camera;
