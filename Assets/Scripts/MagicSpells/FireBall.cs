@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBall : MagicSpellBase
+public class FireBall : MagicSpellBall
 {
     public override void Activate()
     {

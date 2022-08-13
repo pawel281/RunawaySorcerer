@@ -392,7 +392,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &298121616
@@ -1055,9 +1055,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 4.6, z: -2.9179997}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.6
+  m_YDamping: 0.6
+  m_ZDamping: 0.6
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0

@@ -9,7 +9,7 @@ public class MagicSpellData : ScriptableObject
     [SerializeField] private Color _colorSpell;
     [SerializeField] private string _description;
     [SerializeField] private GameObject _spellPrefab;
-    [SerializeField] private MagicalElement[] _composition;
+    [SerializeField] protected MagicElement[] _composition;
     [SerializeField] private float _damage;
     [SerializeField] private float _speed;
     [SerializeField] private float _lifeTime;
@@ -19,7 +19,7 @@ public class MagicSpellData : ScriptableObject
     public Color ColorSpell => _colorSpell;
     public string Description => _description;
     public GameObject SpellPrefab => _spellPrefab;
-    public MagicalElement[] Composition => _composition;
+    public MagicElement[] Composition => _composition;
     public float Speed => _speed;
     public float LifeTime => _lifeTime;
 
@@ -31,16 +31,16 @@ public class MagicSpellData : ScriptableObject
         set => _damage = value;
     }
 
-    public bool CheckPrescription(MagicalElement[] magicalElements)
+    public bool CheckPrescription(MagicElement[] magicalElements)
     {
         if (_composition.Length == 0)
             throw new InvalidOperationException();
         return _composition.Equals(magicalElements);
     }
 
-    public void Cast(Transform castPoint)
+    public void CreateSpellObject(Transform castPoint)
     {
         var _castedSpell = Instantiate(_spellPrefab, castPoint);
-        _castedSpell.GetComponent<MagicSpellBase>().Initialize(_spriteSpell, _damage, _colorSpell,_speed,_lifeTime);
+        _castedSpell.GetComponent<MagicSpellBall>().Initialize(_spriteSpell, _damage, _colorSpell,_speed,_lifeTime);
     }
 }
