@@ -30,7 +30,9 @@ public class PlayerCombat : MagicCombatBase
 
     public override void Cast()
     {
-        throw new System.NotImplementedException();
+        _poolElements.Clear();
+        _previousSpell = null;
+        
     }
 
     public override void CreateSpell()
@@ -43,6 +45,11 @@ public class PlayerCombat : MagicCombatBase
                 _previousSpell?.CastDeactivation();
                 _previousSpell = spell.CreateSpellObject(spellPoint);
             }
+            else
+            {
+                _previousSpell?.CastDeactivation();
+                _previousSpell = spell.CreateSpellObject(spellPoint);
+            }
         }
         else
         {
@@ -50,6 +57,8 @@ public class PlayerCombat : MagicCombatBase
             _poolElements.Clear();
             _previousSpell = null;
         }
+        
+        
     }
 
     public void AddMagicElementToPool(MagicElement magicElement)

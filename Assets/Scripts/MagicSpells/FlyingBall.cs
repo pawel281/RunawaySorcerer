@@ -21,6 +21,9 @@ public class FlyingBall : MagicSpellBall
          _speed = data.Speed;
          _lifeTime = data.LifeTime;
          _sprite.sprite = data.SpriteSpell;
+         
+         
+         
      }
 
      public override void Activate()
@@ -31,6 +34,7 @@ public class FlyingBall : MagicSpellBall
      public override void CastDeactivation()
      {
          Destroy(gameObject);
+         
      }
 
  
