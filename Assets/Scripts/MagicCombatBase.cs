@@ -5,7 +5,7 @@ public abstract class MagicCombatBase : MonoBehaviour
 {
   
     [SerializeField] protected MagicSpellData[] _AllMagicSpells;
-    protected MagicSpellData _previousSpell;
+    protected MagicSpellBall _previousSpell;
     protected float _manna;
     [SerializeField]  protected float _maxManna;
 

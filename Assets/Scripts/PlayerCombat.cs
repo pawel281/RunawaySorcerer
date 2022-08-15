@@ -5,14 +5,26 @@ using UnityEngine;
 
 public class PlayerCombat : MagicCombatBase
 {
+    [SerializeField] private MagicElement[] testElements; //удалить полсе теста
 
-    [SerializeField] private MagicElement[] testElements;//удалить полсе теста
-    private  List<MagicElement> _poolElements;
+    [SerializeField] private Transform spellPoint;
+    private List<MagicElement> _poolElements = new List<MagicElement>();
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1))//test
         {
-            
+            AddMagicElementToPool(testElements[0]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            AddMagicElementToPool(testElements[1]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            AddMagicElementToPool(testElements[2]);
         }
     }
 
@@ -23,8 +35,21 @@ public class PlayerCombat : MagicCombatBase
 
     public override void CreateSpell()
     {
-        var spell = _AllMagicSpells.FirstOrDefault(i => i.Composition.Equals(_poolElements));
-        print();
+        var spell = CheckOverlapSpell();
+        if (spell)
+        {
+            if (_poolElements.Count == spell.Composition.Length)
+            {
+                _previousSpell?.CastDeactivation();
+                _previousSpell = spell.CreateSpellObject(spellPoint);
+            }
+        }
+        else
+        {
+            _previousSpell?.CastDeactivation();
+            _poolElements.Clear();
+            _previousSpell = null;
+        }
     }
 
     public void AddMagicElementToPool(MagicElement magicElement)
@@ -33,7 +58,47 @@ public class PlayerCombat : MagicCombatBase
         {
             _poolElements.Add(magicElement);
             CreateSpell();
-            ChangeManna(_manna- magicElement.MannaCost);
+            ChangeManna(_manna - magicElement.MannaCost);
         }
+    }
+
+    private MagicSpellData CheckOverlapSpell()
+    {
+        List<MagicSpellData> _spells = new List<MagicSpellData>();
+        var OverlapCount = 0;
+        foreach (var i in _AllMagicSpells.Where(i => i.Composition.Length >= _poolElements.Count).ToArray())
+        {
+            var OverlapTempCount = 0;
+            for (var j = 0; j < _poolElements.Count; j++)
+            {
+                if (_poolElements[j] == i.Composition[j])
+                {
+                    OverlapTempCount++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (OverlapTempCount == OverlapCount)
+            {
+                _spells.Add(i);
+            }
+
+            if (OverlapTempCount > OverlapCount)
+            {
+                OverlapCount = OverlapTempCount;
+                _spells.Clear();
+                _spells.Add(i);
+            }
+        }
+
+        if (_spells.Count > 0)
+        {
+            return _spells.OrderBy(i => i.Composition).ToArray()[0];
+        }
+
+        return null;
     }
 }
