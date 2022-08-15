@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "\u042D\u043D\u0435\u0440\u0433\u0438\u044F"
   _icon: {fileID: 0}
-  _color: {r: 0, g: 0.78634834, b: 1, a: 1}
+  _color: {r: 0.74443007, g: 1, b: 0.16509432, a: 1}
   _description: 
+  mannaCost: 10

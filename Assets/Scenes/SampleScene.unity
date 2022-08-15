@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161029702}
   m_LocalRotation: {x: -0.4874643, y: -0.51222944, z: 0.51222414, w: -0.48746902}
-  m_LocalPosition: {x: -0.005, y: 1.423, z: 0.016}
+  m_LocalPosition: {x: -0.003, y: 1.369, z: 0.053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1250539508}
@@ -425,6 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _AllMagicSpells:
   - {fileID: 11400000, guid: 23c47324b3faaf3428fe7cd78497587b, type: 2}
+  _magicSpellIntermediate: {fileID: 11400000, guid: 27ba04c72c8093b42bb8a76e496294f6, type: 2}
   _maxManna: 100
   testElements:
   - {fileID: 11400000, guid: 00ad76801b3f62643ba03a3a70e58c66, type: 2}
@@ -728,7 +729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.47296888, y: 0, z: 0, w: 0.8810792}
-  m_LocalPosition: {x: -0.2979809, y: 5.680005, z: -5.6302457}
+  m_LocalPosition: {x: -0.2982235, y: 5.6260047, z: -5.593192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1054,7 +1055,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594869380}
   m_LocalRotation: {x: 0.47296885, y: -0, z: -0, w: 0.88107914}
-  m_LocalPosition: {x: -0.2979809, y: 5.680005, z: -5.6302457}
+  m_LocalPosition: {x: -0.2982235, y: 5.6260047, z: -5.593192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1631112408}

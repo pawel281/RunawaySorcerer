@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3893513470850785687}
   - component: {fileID: 3893513470850785686}
   - component: {fileID: 3893513470850785685}
+  - component: {fileID: 4240088066796134482}
+  - component: {fileID: 1596151877530842191}
   m_Layer: 0
   m_Name: CastBall
   m_TagString: Untagged
@@ -95,3 +97,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b20279df9809b642a2f10f5912e75a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &4240088066796134482
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3893513470850785684}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &1596151877530842191
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3893513470850785684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.16000004
+  m_Center: {x: 0, y: 0, z: 0}

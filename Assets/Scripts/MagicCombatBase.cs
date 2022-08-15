@@ -5,7 +5,8 @@ public abstract class MagicCombatBase : MonoBehaviour
 {
   
     [SerializeField] protected MagicSpellData[] _AllMagicSpells;
-    protected MagicSpellBall _previousSpell;
+    protected MagicSpell _previousSpell;
+    [SerializeField] protected MagicSpellData _magicSpellIntermediate;
     protected float _manna;
     [SerializeField]  protected float _maxManna;
 
@@ -23,5 +24,16 @@ public abstract class MagicCombatBase : MonoBehaviour
     public abstract void CreateSpell();
 
   
+    public Color CombineColors(params Color[] aColors)
+    {
+        Color result = new Color(0,0,0,1);
+        foreach(Color c in aColors)
+        {
+            result += c;
+        }
+        result /= aColors.Length;
+
+        return result;
+    }
 
 }

@@ -12,7 +12,7 @@ public class PlayerCombat : MagicCombatBase
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))//test
+        if (Input.GetKeyDown(KeyCode.Keypad1)) //test
         {
             AddMagicElementToPool(testElements[0]);
         }
@@ -26,39 +26,39 @@ public class PlayerCombat : MagicCombatBase
         {
             AddMagicElementToPool(testElements[2]);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+           Cast();
+        }
     }
 
     public override void Cast()
     {
+        _previousSpell?.Activate();
         _poolElements.Clear();
         _previousSpell = null;
-        
     }
 
     public override void CreateSpell()
     {
         var spell = CheckOverlapSpell();
+        _previousSpell?.CastDeactivation();
         if (spell)
         {
             if (_poolElements.Count == spell.Composition.Length)
             {
-                _previousSpell?.CastDeactivation();
                 _previousSpell = spell.CreateSpellObject(spellPoint);
             }
             else
             {
-                _previousSpell?.CastDeactivation();
-                _previousSpell = spell.CreateSpellObject(spellPoint);
+                _previousSpell = _magicSpellIntermediate.CreateSpellObject(spellPoint, CombineColors(_poolElements.Select(i => i.Color).ToArray()));
             }
         }
         else
         {
-            _previousSpell?.CastDeactivation();
             _poolElements.Clear();
             _previousSpell = null;
         }
-        
-        
     }
 
     public void AddMagicElementToPool(MagicElement magicElement)
@@ -78,6 +78,7 @@ public class PlayerCombat : MagicCombatBase
         foreach (var i in _AllMagicSpells.Where(i => i.Composition.Length >= _poolElements.Count).ToArray())
         {
             var OverlapTempCount = 0;
+            var overlap = true;
             for (var j = 0; j < _poolElements.Count; j++)
             {
                 if (_poolElements[j] == i.Composition[j])
@@ -86,8 +87,14 @@ public class PlayerCombat : MagicCombatBase
                 }
                 else
                 {
+                    overlap = false;
                     break;
                 }
+            }
+
+            if (!overlap)
+            {
+                continue;
             }
 
             if (OverlapTempCount == OverlapCount)

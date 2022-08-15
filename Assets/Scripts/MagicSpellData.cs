@@ -31,11 +31,16 @@ public class MagicSpellData : ScriptableObject
     }
 
 
-    public MagicSpellBall CreateSpellObject(Transform castPoint)
+    public MagicSpell CreateSpellObject(Transform castPoint, Color? col = null)
     {
+        if (col!=null)
+        {
+            _colorSpell = (Color) col;
+        }
+
         var _castedSpell = Instantiate(_spellPrefab, castPoint.position, _spellPrefab.transform.rotation);
         _castedSpell.transform.SetParent(castPoint);
-        var magicSpell = _castedSpell.GetComponent<MagicSpellBall>();
+        var magicSpell = _castedSpell.GetComponent<MagicSpell>();
         magicSpell.Initialize(this);
         return magicSpell;
     }
