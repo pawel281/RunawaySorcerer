@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntermediateSpell : MagicSpell
+public class IntermediateSpellBase : MagicSpellBase
 {    
     protected Color _colorSpell;
     public override void Initialize(MagicSpellData data)

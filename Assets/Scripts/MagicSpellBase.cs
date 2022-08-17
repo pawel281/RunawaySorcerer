@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public abstract class MagicSpell : MonoBehaviour
+public abstract class MagicSpellBase : MonoBehaviour
 {
     protected SpriteRenderer _spriteRenderer;
     protected bool _isActive;

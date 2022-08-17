@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class MagicCombatBase : MonoBehaviour
 {
     [SerializeField] protected MagicSpellData[] _AllMagicSpells;
-    protected MagicSpell _previousSpell;
+    protected MagicSpellBase PreviousSpellBase;
     [SerializeField] protected MagicSpellData _magicSpellIntermediate;
     protected float _manna;
     [SerializeField] protected float _maxManna;
@@ -26,14 +26,13 @@ public abstract class MagicCombatBase : MonoBehaviour
         ChangeManna(_manna + Time.deltaTime * _speedMannaRegen);
     }
 
-    protected Color CombineSpellColors(Color[] aColors)
+    protected Color CombineSpellsColors(Color[] aColors)
     {
         Color result = new Color(0, 0, 0, 1);
         foreach (Color c in aColors)
         {
             result += c;
         }
-
         result /= aColors.Length;
 
         return result;

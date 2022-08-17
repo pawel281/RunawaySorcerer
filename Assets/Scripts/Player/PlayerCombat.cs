@@ -22,22 +22,22 @@ public class PlayerCombat : MagicCombatBase
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.Keypad1)) //test
+        if (Input.GetKeyDown(KeyCode.Alpha1)) //test
         {
             AddMagicElementToPool(testElements[0]);
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             AddMagicElementToPool(testElements[1]);
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             AddMagicElementToPool(testElements[2]);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             Cast();
         }
@@ -45,30 +45,30 @@ public class PlayerCombat : MagicCombatBase
 
     public override void Cast()
     {
-        _previousSpell?.Activate();
+        PreviousSpellBase?.Activate();
         _poolElements.Clear();
-        _previousSpell = null;
+        PreviousSpellBase = null;
     }
 
     public override void CreateSpell()
     {
         var spell = CheckOverlapSpell();
-        _previousSpell?.DestroyUnfinishedSpell();
+        PreviousSpellBase?.DestroyUnfinishedSpell();
         if (spell)
         {
             if (_poolElements.Count == spell.Composition.Length)
             {
-                _previousSpell = spell.CreateSpellObject(_spellPoint);
+                PreviousSpellBase = spell.CreateSpellObject(_spellPoint);
             }
             else
             {
-                _previousSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellColors(_poolElements.Select(i => i.Color).ToArray()));
+                PreviousSpellBase = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
             }
         }
         else
         {
             _poolElements.Clear();
-            _previousSpell = null;
+            PreviousSpellBase = null;
         }
     }
 

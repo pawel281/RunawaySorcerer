@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class FlyingBall : MagicSpell
+public class FlyingBall : MagicSpellBase
 {
     private Rigidbody _rigidbody;
     private Vector3 _direction;
@@ -49,7 +49,7 @@ public class FlyingBall : MagicSpell
     {
         if (_isActive)
         {
-            var otherSpell = other.transform.GetComponent<MagicSpell>();
+            var otherSpell = other.transform.GetComponent<MagicSpellBase>();
             if (otherSpell != null && otherSpell.IsActive)
             {
                 if (_spellData.YieldingSpells.FirstOrDefault(i => i.Name == otherSpell.SpellData.Name)) //затычка

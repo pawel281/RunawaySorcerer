@@ -428,7 +428,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f293332155ea50c499a8f12ac25d3707, type: 2}
   _magicSpellIntermediate: {fileID: 11400000, guid: 27ba04c72c8093b42bb8a76e496294f6, type: 2}
   _maxManna: 100
-  _speedMannaRegen: 0
+  _speedMannaRegen: 5
   testElements:
   - {fileID: 11400000, guid: 00ad76801b3f62643ba03a3a70e58c66, type: 2}
   - {fileID: 11400000, guid: 69fc9622b0ca0864c9c5fdf6211e6377, type: 2}
