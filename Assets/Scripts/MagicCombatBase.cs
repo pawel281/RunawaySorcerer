@@ -16,28 +16,17 @@ public abstract class MagicCombatBase : MonoBehaviour
         _manna = _maxManna;
     }
 
-    protected void OnValidate()
-    {
-        if (!_magicSpellIntermediate)
-            throw new InvalidOperationException();
-    }
-
     protected void ChangeManna(float value)
     {
         _manna = Mathf.Clamp(value, 0, _maxManna);
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         ChangeManna(_manna + Time.deltaTime * _speedMannaRegen);
     }
 
-    public abstract void Cast();
-
-    public abstract void CreateSpell();
-
-
-    public Color CombineColors(params Color[] aColors)
+    protected Color CombineSpellColors(Color[] aColors)
     {
         Color result = new Color(0, 0, 0, 1);
         foreach (Color c in aColors)
@@ -49,4 +38,8 @@ public abstract class MagicCombatBase : MonoBehaviour
 
         return result;
     }
+
+    public abstract void Cast();
+
+    public abstract void CreateSpell();
 }

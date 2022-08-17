@@ -12,13 +12,14 @@ public class PlayerCombat : MagicCombatBase
 
     private void OnValidate()
     {
-        base.OnValidate();
+        if (!_magicSpellIntermediate)
+            throw new InvalidOperationException();
         if (!_spellPoint)
             throw new InvalidOperationException();
     }
 
 
-    private void Update()
+    protected override void Update()
     {
         base.Update();
         if (Input.GetKeyDown(KeyCode.Keypad1)) //test
@@ -61,7 +62,7 @@ public class PlayerCombat : MagicCombatBase
             }
             else
             {
-                _previousSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineColors(_poolElements.Select(i => i.Color).ToArray()));
+                _previousSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellColors(_poolElements.Select(i => i.Color).ToArray()));
             }
         }
         else
