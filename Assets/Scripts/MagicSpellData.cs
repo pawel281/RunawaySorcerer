@@ -9,11 +9,12 @@ public class MagicSpellData : ScriptableObject
     [SerializeField] private Color _colorSpell;
     [SerializeField] private string _description;
     [SerializeField] private GameObject _spellPrefab;
-    [SerializeField] protected MagicElement[] _composition;
-    [SerializeField] private float _damage; //может вынести в интерфейс
+    [SerializeField] private float _damage; //может ещё разбить на подклассы, но зачем?
     [SerializeField] private float _speed;
     [SerializeField] private float _lifeTime;
-
+    [SerializeField] protected MagicElement[] _composition;
+    [SerializeField] private MagicSpellData[] _yieldingSpells;
+    
     public string Name => _name;
     public Sprite SpriteSpell => _spriteSpell;
     public Color ColorSpell => _colorSpell;
@@ -22,7 +23,7 @@ public class MagicSpellData : ScriptableObject
     public MagicElement[] Composition => _composition;
     public float Speed => _speed;
     public float LifeTime => _lifeTime;
-
+    public MagicSpellData[] YieldingSpells => _yieldingSpells;
 
     public float Damage
     {

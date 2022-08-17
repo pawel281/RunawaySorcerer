@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,20 @@ using UnityEngine;
 public class PlayerCombat : MagicCombatBase
 {
     [SerializeField] private MagicElement[] testElements; //удалить полсе теста
-
-    [SerializeField] private Transform spellPoint;
+    [SerializeField] private Transform _spellPoint;
     private List<MagicElement> _poolElements = new List<MagicElement>();
 
-    void Update()
+    private void OnValidate()
     {
+        base.OnValidate();
+        if (!_spellPoint)
+            throw new InvalidOperationException();
+    }
+
+
+    private void Update()
+    {
+        base.Update();
         if (Input.GetKeyDown(KeyCode.Keypad1)) //test
         {
             AddMagicElementToPool(testElements[0]);
@@ -26,9 +35,10 @@ public class PlayerCombat : MagicCombatBase
         {
             AddMagicElementToPool(testElements[2]);
         }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           Cast();
+            Cast();
         }
     }
 
@@ -42,16 +52,16 @@ public class PlayerCombat : MagicCombatBase
     public override void CreateSpell()
     {
         var spell = CheckOverlapSpell();
-        _previousSpell?.CastDeactivation();
+        _previousSpell?.DestroyUnfinishedSpell();
         if (spell)
         {
             if (_poolElements.Count == spell.Composition.Length)
             {
-                _previousSpell = spell.CreateSpellObject(spellPoint);
+                _previousSpell = spell.CreateSpellObject(_spellPoint);
             }
             else
             {
-                _previousSpell = _magicSpellIntermediate.CreateSpellObject(spellPoint, CombineColors(_poolElements.Select(i => i.Color).ToArray()));
+                _previousSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineColors(_poolElements.Select(i => i.Color).ToArray()));
             }
         }
         else

@@ -4,19 +4,22 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class MagicSpell : MonoBehaviour
 {
-    protected SpriteRenderer _sprite;
+    protected SpriteRenderer _spriteRenderer;
     protected bool _isActive;
-
+    protected MagicSpellData _spellData;
+    public MagicSpellData SpellData => _spellData;
     public bool IsActive => _isActive;
+
 
     private void Awake()
     {
-        _sprite = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public abstract void Initialize(MagicSpellData data);
-    
+
     public abstract void Activate();
 
-    public  abstract void CastDeactivation();
+    public abstract void DestroyUnfinishedSpell();
+    public abstract void DestroySpell();
 }

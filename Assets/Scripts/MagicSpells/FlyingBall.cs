@@ -1,36 +1,22 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class FlyingBall : MagicSpell
 {
-    private float _damage;
-    private float _speed;
     private Rigidbody _rigidbody;
     private Vector3 _direction;
-    protected float _lifeTime;
-    protected Color _colorSpell;
-
-
-    public float Speed => _speed;
-    public Color ColorSpell => _colorSpell;
-    public float Damage => _damage;
 
 
     public override void Initialize(MagicSpellData data)
     {
-
-        _damage = data.Damage;
-        _colorSpell = data.ColorSpell;
-        _speed = data.Speed;
-        _lifeTime = data.LifeTime;
-        _sprite.sprite = data.SpriteSpell;
+        _spellData = Instantiate(data);
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = true;
-
+        _spriteRenderer.sprite = data.SpriteSpell;
     }
-    
 
     public override void Activate()
     {
@@ -39,26 +25,52 @@ public class FlyingBall : MagicSpell
         _direction = transform.parent.up;
         transform.parent = null;
         StartCoroutine(TimerDestroy());
-        
     }
-    
 
-    public override void CastDeactivation()
+    public override void DestroyUnfinishedSpell()
     {
         Destroy(gameObject);
     }
+
+    public override void DestroySpell()
+    {
+        Destroy(gameObject);
+    }
+
     private void FixedUpdate()
     {
         if (_isActive)
         {
-            _rigidbody.velocity = _direction* _speed;
+            _rigidbody.velocity = _direction * _spellData.Speed;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (_isActive)
+        {
+            var otherSpell = other.transform.GetComponent<MagicSpell>();
+            if (otherSpell != null && otherSpell.IsActive)
+            {
+                if (_spellData.YieldingSpells.FirstOrDefault(i => i.Name == otherSpell.SpellData.Name)) //затычка
+                {
+                    otherSpell.DestroySpell();
+                    if (otherSpell.SpellData.YieldingSpells.FirstOrDefault(i => i.Name == _spellData.Name))
+                    {
+                        DestroySpell();
+                    }
+                }
+            }
+            else
+            {
+                DestroySpell();
+            }
         }
     }
 
     private IEnumerator TimerDestroy()
     {
-        yield return new WaitForSeconds(_lifeTime);
-        CastDeactivation();
+        yield return new WaitForSeconds(_spellData.LifeTime);
+        DestroySpell();
     }
 }
-  

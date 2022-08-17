@@ -8,8 +8,8 @@ public class IntermediateSpell : MagicSpell
     public override void Initialize(MagicSpellData data)
     {
         _colorSpell = data.ColorSpell;
-        _sprite.sprite = data.SpriteSpell;
-        _sprite.color = _colorSpell;
+        _spriteRenderer.sprite = data.SpriteSpell;
+        _spriteRenderer.color = _colorSpell;
     }
 
     public override void Activate()
@@ -17,8 +17,13 @@ public class IntermediateSpell : MagicSpell
         Destroy(gameObject);
     }
 
-    public override void CastDeactivation()
+    public override void DestroyUnfinishedSpell()
     {
         Destroy(gameObject);
+    }
+
+    public override void DestroySpell()
+    {
+        throw new System.NotImplementedException();
     }
 }
