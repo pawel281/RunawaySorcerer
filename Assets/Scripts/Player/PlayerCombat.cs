@@ -45,30 +45,30 @@ public class PlayerCombat : MagicCombatBase
 
     public override void Cast()
     {
-        PreviousSpellBase?.Activate();
+        _previousSpell?.Activate();
         _poolElements.Clear();
-        PreviousSpellBase = null;
+        _previousSpell = null;
     }
 
     public override void CreateSpell()
     {
         var spell = CheckOverlapSpell();
-        PreviousSpellBase?.DestroyUnfinishedSpell();
+        _previousSpell?.DestroyUnfinishedSpell();
         if (spell)
         {
             if (_poolElements.Count == spell.Composition.Length)
             {
-                PreviousSpellBase = spell.CreateSpellObject(_spellPoint);
+                _previousSpell = spell.CreateSpellObject(_spellPoint);
             }
             else
             {
-                PreviousSpellBase = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
+                _previousSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
             }
         }
         else
         {
             _poolElements.Clear();
-            PreviousSpellBase = null;
+            _previousSpell = null;
         }
     }
 
