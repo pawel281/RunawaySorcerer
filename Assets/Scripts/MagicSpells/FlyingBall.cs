@@ -16,6 +16,7 @@ public class FlyingBall : MagicSpellBase
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = true;
         _spriteRenderer.sprite = data.SpriteSpell;
+        _spriteRenderer.color = data.ColorSpell;
     }
 
     public override void Activate()

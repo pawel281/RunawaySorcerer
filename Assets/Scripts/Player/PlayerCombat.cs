@@ -1,14 +1,23 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using Zenject;
 
 public class PlayerCombat : MagicCombatBase
 {
     [SerializeField] private MagicElement[] testElements; //удалить полсе теста
     [SerializeField] private Transform _spellPoint;
     private List<MagicElement> _poolElements = new List<MagicElement>();
+    private CreateSpellUISelector _spellUiSelector;
+    public UnityAction elementAdded;
+   
+    [Inject] 
+    private void Constructor(CreateSpellUISelector spellUiSelector)
+    {
+        _spellUiSelector = spellUiSelector;
+    }
 
     private void OnValidate()
     {
@@ -45,31 +54,35 @@ public class PlayerCombat : MagicCombatBase
 
     public override void Cast()
     {
-        _previousSpell?.Activate();
-        _poolElements.Clear();
-        _previousSpell = null;
+        if (!_spellUiSelector.gameObject.activeSelf)
+        {
+            _currentSpell?.Activate();
+            _poolElements.Clear();
+            _currentSpell = null;
+        }
     }
 
     public override void CreateSpell()
     {
         var spell = CheckOverlapSpell();
-        _previousSpell?.DestroyUnfinishedSpell();
+        _currentSpell?.DestroyUnfinishedSpell();
         if (spell)
         {
             if (_poolElements.Count == spell.Composition.Length)
             {
-                _previousSpell = spell.CreateSpellObject(_spellPoint);
+                _currentSpell = spell.CreateSpellObject(_spellPoint);
             }
             else
             {
-                _previousSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
+                _currentSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
             }
         }
         else
         {
             _poolElements.Clear();
-            _previousSpell = null;
+            _currentSpell = null;
         }
+        elementAdded.Invoke();
     }
 
     public void AddMagicElementToPool(MagicElement magicElement)
@@ -79,6 +92,7 @@ public class PlayerCombat : MagicCombatBase
             _poolElements.Add(magicElement);
             CreateSpell();
             ChangeManna(_manna - magicElement.MannaCost);
+          
         }
     }
 

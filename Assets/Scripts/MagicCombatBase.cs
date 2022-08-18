@@ -4,13 +4,13 @@ using UnityEngine;
 public abstract class MagicCombatBase : MonoBehaviour
 {
     [SerializeField] protected MagicSpellData[] _AllMagicSpells;
-    protected MagicSpellBase _previousSpell;
+    protected MagicSpellBase _currentSpell;
     [SerializeField] protected MagicSpellData _magicSpellIntermediate;
     protected float _manna;
     [SerializeField] protected float _maxManna;
     [SerializeField] private float _speedMannaRegen;
     public float SpeedMannaRegen => _speedMannaRegen;
-    public MagicSpellBase PreviousSpell => _previousSpell;
+    public MagicSpellBase CurrentSpell => _currentSpell;
 
     private void Awake()
     {

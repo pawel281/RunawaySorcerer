@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class IntermediateSpellBase : MagicSpellBase
 {    
-    protected Color _colorSpell;
+
     public override void Initialize(MagicSpellData data)
     {
-        _colorSpell = data.ColorSpell;
+        _spellData = Instantiate(data);
         _spriteRenderer.sprite = data.SpriteSpell;
-        _spriteRenderer.color = _colorSpell;
+        _spriteRenderer.color =data.ColorSpell;
     }
 
     public override void Activate()
