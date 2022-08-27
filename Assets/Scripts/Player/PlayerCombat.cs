@@ -11,8 +11,7 @@ public class PlayerCombat : MagicCombatBase
     [SerializeField] private Transform _spellPoint;
     private List<MagicElement> _poolElements = new List<MagicElement>();
     private CreateSpellUISelector _spellUiSelector;
-    public UnityAction elementAdded;
-   
+    public UnityAction<bool> elementAdded;
     [Inject] 
     private void Constructor(CreateSpellUISelector spellUiSelector)
     {
@@ -76,13 +75,15 @@ public class PlayerCombat : MagicCombatBase
             {
                 _currentSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
             }
+            elementAdded?.Invoke(false);
         }
         else
         {
             _poolElements.Clear();
             _currentSpell = null;
+            elementAdded?.Invoke(true);
         }
-        elementAdded.Invoke();
+     
     }
 
     public void AddMagicElementToPool(MagicElement magicElement)
