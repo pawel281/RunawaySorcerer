@@ -71,7 +71,7 @@ public class FlyingBall : MagicSpellBase
 
     private IEnumerator TimerDestroy()
     {
-        yield return new WaitForSeconds(_spellData.LifeTime);
+        yield return new WaitForSeconds(_spellData.Life);
         DestroySpell();
     }
 }

@@ -12,10 +12,10 @@ public class PlayerCombat : MagicCombatBase
     private CreateSpellUISelector _spellUiSelector;
     private MagicShield _magicShield;
     public UnityAction<bool> onElementAdded;
-  
-    
+
+
     [Inject]
-    private void Constructor(CreateSpellUISelector spellUiSelector,MagicShield magicShield)
+    private void Constructor(CreateSpellUISelector spellUiSelector, MagicShield magicShield)
     {
         _spellUiSelector = spellUiSelector;
         _magicShield = magicShield;
@@ -29,7 +29,6 @@ public class PlayerCombat : MagicCombatBase
             throw new InvalidOperationException();
     }
 
-    
 
     public override void Cast()
     {

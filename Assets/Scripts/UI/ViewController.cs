@@ -49,12 +49,14 @@ public class ViewController : MonoBehaviour
         {
             _currentViewUp.Hide();
         }
+
         _view.Show();
         _currentViewUp = _view;
     }
+
     public void ShowPreviousView(View _view)
     {
-     _previousView?.Show();
+        _previousView?.Show();
     }
 
     private void Start()
@@ -63,6 +65,7 @@ public class ViewController : MonoBehaviour
         {
             i.Initialize();
         }
+
         _currentView?.Show();
     }
 }

@@ -7,8 +7,8 @@ public class SimpleSceneInstaller : MonoInstaller
     public PlayerCombat playerCombat;
     public ViewController viewController;
     public CreateSpellUISelector spellSelector;
-    
-    
+
+
     public override void InstallBindings()
     {
         Container.BindInstance(mainCamera).AsSingle();

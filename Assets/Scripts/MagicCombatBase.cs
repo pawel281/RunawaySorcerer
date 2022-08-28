@@ -17,7 +17,7 @@ public abstract class MagicCombatBase : MonoBehaviour
         _manna = _maxManna;
     }
 
-    protected  virtual void ChangeManna(float value)
+    protected virtual void ChangeManna(float value)
     {
         _manna = Mathf.Clamp(value, 0, _maxManna);
     }
@@ -34,16 +34,17 @@ public abstract class MagicCombatBase : MonoBehaviour
         {
             result += c;
         }
+
         result /= aColors.Length;
 
         return result;
     }
 
-    public virtual void  ChangeMannaRegenSpeedSpeed(float speed)
+    public virtual void ChangeMannaRegenSpeedSpeed(float speed)
     {
-        _speedMannaRegen =  Mathf.Clamp(speed,0,Mathf.Infinity);
-
+        _speedMannaRegen = Mathf.Clamp(speed, 0, Mathf.Infinity);
     }
+
     public abstract void Cast();
 
     public abstract void CreateSpell();
