@@ -22,12 +22,14 @@ public class CreateSpellUISelector : View
     public override void Initialize()
     {
         UpdateUI();
-        _playerCombat.elementAdded += ElementAdded;
+        _playerCombat.onElementAdded += OnElementAdded;
     }
 
     private void OnValidate()
     {
         if (_iconSpell == null)
+            throw new InvalidOperationException();
+        if (_iconPlace == null)
             throw new InvalidOperationException();
         if (_nameSpell == null)
             throw new InvalidOperationException();
@@ -43,7 +45,7 @@ public class CreateSpellUISelector : View
 
     private void OnDestroy()
     {
-        _playerCombat.elementAdded -= ElementAdded;
+        _playerCombat.onElementAdded -= OnElementAdded;
     }
 
 
@@ -66,9 +68,9 @@ public class CreateSpellUISelector : View
         }
     }
 
-    private void ElementAdded(bool isFailed)
+    private void OnElementAdded(bool isFailed)
     {
-        StartCoroutine(IconAnimation(isFailed?Color.red:Color.green));
+        StartCoroutine(IconAnimation(isFailed ? Color.red : Color.green));
         UpdateUI();
     }
 

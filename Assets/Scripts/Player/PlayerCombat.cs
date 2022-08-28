@@ -7,15 +7,18 @@ using Zenject;
 
 public class PlayerCombat : MagicCombatBase
 {
-    [SerializeField] private MagicElement[] testElements; //удалить полсе теста
     [SerializeField] private Transform _spellPoint;
     private List<MagicElement> _poolElements = new List<MagicElement>();
     private CreateSpellUISelector _spellUiSelector;
-    public UnityAction<bool> elementAdded;
-    [Inject] 
-    private void Constructor(CreateSpellUISelector spellUiSelector)
+    private MagicShield _magicShield;
+    public UnityAction<bool> onElementAdded;
+  
+    
+    [Inject]
+    private void Constructor(CreateSpellUISelector spellUiSelector,MagicShield magicShield)
     {
         _spellUiSelector = spellUiSelector;
+        _magicShield = magicShield;
     }
 
     private void OnValidate()
@@ -26,30 +29,7 @@ public class PlayerCombat : MagicCombatBase
             throw new InvalidOperationException();
     }
 
-
-    protected override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.Alpha1)) //test
-        {
-            AddMagicElementToPool(testElements[0]);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            AddMagicElementToPool(testElements[1]);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            AddMagicElementToPool(testElements[2]);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cast();
-        }
-    }
+    
 
     public override void Cast()
     {
@@ -67,6 +47,11 @@ public class PlayerCombat : MagicCombatBase
         _currentSpell?.DestroyUnfinishedSpell();
         if (spell)
         {
+            if (_poolElements.Count > 0)
+            {
+                onElementAdded?.Invoke(false);
+            }
+
             if (_poolElements.Count == spell.Composition.Length)
             {
                 _currentSpell = spell.CreateSpellObject(_spellPoint);
@@ -75,15 +60,13 @@ public class PlayerCombat : MagicCombatBase
             {
                 _currentSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
             }
-            elementAdded?.Invoke(false);
         }
         else
         {
             _poolElements.Clear();
             _currentSpell = null;
-            elementAdded?.Invoke(true);
+            onElementAdded?.Invoke(true);
         }
-     
     }
 
     public void AddMagicElementToPool(MagicElement magicElement)
@@ -93,7 +76,6 @@ public class PlayerCombat : MagicCombatBase
             _poolElements.Add(magicElement);
             CreateSpell();
             ChangeManna(_manna - magicElement.MannaCost);
-          
         }
     }
 
