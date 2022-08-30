@@ -67,8 +67,7 @@ public class MagicShield : MonoBehaviour
         {
             _magicShield = shield;
             _yieldingSpell = dataYielding;
-            _elementVisual = Instantiate(_magicShield._elementVisual, _magicShield.transform.position, _magicShield.transform.rotation).GetComponent<SpriteRenderer>();
-            _elementVisual.transform.SetParent(_magicShield.transform);
+            _elementVisual = DiContainerRef.Container.InstantiatePrefab(_magicShield._elementVisual, _magicShield.transform.position, _magicShield.transform.rotation,_magicShield.transform).GetComponent<SpriteRenderer>();
             _elementVisual.color = _color = dataShield.ColorSpell;
             ActivateShield(dataShield);
         }
