@@ -15,6 +15,7 @@ public class SimpleSceneInstaller : MonoInstaller
         Container.BindInstance(viewController).AsSingle();
         Container.BindInstance(spellSelector).AsSingle();
         Container.BindInstance(playerCombat).AsSingle();
-        Container.Bind<MagicShield>().FromComponentInChildren();
+    //    Container.Bind<MagicShield>().FromComponentInChildren();
+        DiContainerRef.Container = Container;
     }
 }

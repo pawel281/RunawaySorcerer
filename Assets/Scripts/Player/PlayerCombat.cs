@@ -10,15 +10,13 @@ public class PlayerCombat : MagicCombatBase
     [SerializeField] private Transform _spellPoint;
     private List<MagicElement> _poolElements = new List<MagicElement>();
     private CreateSpellUISelector _spellUiSelector;
-    private MagicShield _magicShield;
     public UnityAction<bool> onElementAdded;
 
 
     [Inject]
-    private void Constructor(CreateSpellUISelector spellUiSelector, MagicShield magicShield)
+    private void Constructor(CreateSpellUISelector spellUiSelector)
     {
         _spellUiSelector = spellUiSelector;
-        _magicShield = magicShield;
     }
 
     private void OnValidate()
@@ -46,11 +44,6 @@ public class PlayerCombat : MagicCombatBase
         _currentSpell?.DestroyUnfinishedSpell();
         if (spell)
         {
-            if (_poolElements.Count > 0)
-            {
-                onElementAdded?.Invoke(false);
-            }
-
             if (_poolElements.Count == spell.Composition.Length)
             {
                 _currentSpell = spell.CreateSpellObject(_spellPoint);
@@ -59,6 +52,7 @@ public class PlayerCombat : MagicCombatBase
             {
                 _currentSpell = _magicSpellIntermediate.CreateSpellObject(_spellPoint, CombineSpellsColors(_poolElements.Select(i => i.Color).ToArray()));
             }
+            onElementAdded?.Invoke(false);
         }
         else
         {

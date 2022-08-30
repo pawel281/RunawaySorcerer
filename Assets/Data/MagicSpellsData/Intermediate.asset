@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862ca9f3305acf3469488b8dd1492f36, type: 3}
   m_Name: Intermediate
   m_EditorClassIdentifier: 
-  _name: 
+  _name: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043C\u0430\u0441\u0441\u0430"
   _spriteSpell: {fileID: 21300000, guid: 008ab743902d299449b0b641624f4436, type: 3}
-  _colorSpell: {r: 1, g: 1, b: 1, a: 1.5}
+  _colorSpell: {r: 1, g: 0.17973809, b: 0, a: 2}
   _description: 
   _spellPrefab: {fileID: 3893513470850785684, guid: 07493f053e56aa04299b742eae832919, type: 3}
-  _composition: []
   _damage: 0
   _speed: 0
-  _lifeTime: 0
+  _life: 0
+  _composition: []
+  _yieldingSpells: []

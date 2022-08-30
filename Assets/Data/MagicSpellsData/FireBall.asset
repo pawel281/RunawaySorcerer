@@ -19,7 +19,7 @@ MonoBehaviour:
   _spellPrefab: {fileID: 3893513470850785684, guid: 08fe285f20f5b61479b7948f2a4d37f1, type: 3}
   _damage: 3
   _speed: 12
-  _lifeTime: 10
+  _life: 3
   _composition:
   - {fileID: 11400000, guid: 69fc9622b0ca0864c9c5fdf6211e6377, type: 2}
   - {fileID: 11400000, guid: 69fc9622b0ca0864c9c5fdf6211e6377, type: 2}

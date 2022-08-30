@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Magic/MagicSpellData")]
@@ -14,7 +13,6 @@ public class MagicSpellData : ScriptableObject
     [SerializeField] private float _life;
     [SerializeField] protected MagicElement[] _composition;
     [SerializeField] private MagicSpellData[] _yieldingSpells;
-
     public string Name => _name;
     public Sprite SpriteSpell => _spriteSpell;
     public Color ColorSpell => _colorSpell;
@@ -39,11 +37,12 @@ public class MagicSpellData : ScriptableObject
             _colorSpell = (Color) col;
         }
 
-        var _castedSpell = Instantiate(_spellPrefab, castPoint.position, _spellPrefab.transform.rotation);
-        _castedSpell.transform.SetParent(castPoint);
+        var _castedSpell = DiContainerRef.Container.InstantiatePrefab(_spellPrefab, castPoint.position, _spellPrefab.transform.rotation,castPoint);
         var magicSpell = _castedSpell.GetComponent<MagicSpellBase>();
         magicSpell.Initialize(this);
+     
         return magicSpell;
+    
     }
 }
 

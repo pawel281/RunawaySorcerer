@@ -74,10 +74,6 @@ public class CreateSpellUISelector : View
         UpdateUI();
     }
 
-    private void SuccessfulCast()
-    {
-        StartCoroutine(IconAnimation(Color.green));
-    }
 
     private IEnumerator IconAnimation(Color col)
     {

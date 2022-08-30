@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class MagicSpellBase : MonoBehaviour
@@ -9,7 +10,6 @@ public abstract class MagicSpellBase : MonoBehaviour
     protected MagicSpellData _spellData;
     public MagicSpellData SpellData => _spellData;
     public bool IsActive => _isActive;
-
 
     private void Awake()
     {

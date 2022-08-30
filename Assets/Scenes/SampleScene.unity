@@ -123,6 +123,66 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13330477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13330478}
+  - component: {fileID: 13330479}
+  - component: {fileID: 13330480}
+  m_Layer: 0
+  m_Name: Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13330478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13330477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.836, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1493167369}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13330479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13330477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557a624bc8d1a2d41a1b48067fbe0ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radiusElementMoving: 1
+  _speedElementMoving: 3
+  _elementVisual: {fileID: 8301791199455698240, guid: 40b3f901252a0b54f8c7c3c2d07b321d, type: 3}
+--- !u!135 &13330480
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13330477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &72221512
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,13 +689,10 @@ MonoBehaviour:
   _AllMagicSpells:
   - {fileID: 11400000, guid: 23c47324b3faaf3428fe7cd78497587b, type: 2}
   - {fileID: 11400000, guid: f293332155ea50c499a8f12ac25d3707, type: 2}
+  - {fileID: 11400000, guid: 8e6c678ed94818044b65eb717bf43c74, type: 2}
   _magicSpellIntermediate: {fileID: 11400000, guid: 27ba04c72c8093b42bb8a76e496294f6, type: 2}
   _maxManna: 100
   _speedMannaRegen: 5
-  testElements:
-  - {fileID: 11400000, guid: 00ad76801b3f62643ba03a3a70e58c66, type: 2}
-  - {fileID: 11400000, guid: 69fc9622b0ca0864c9c5fdf6211e6377, type: 2}
-  - {fileID: 11400000, guid: 6d4c7cb411dbc7b449d2e34063c812da, type: 2}
   _spellPoint: {fileID: 423233413}
 --- !u!1 &339273305
 GameObject:
@@ -1906,6 +1963,7 @@ Transform:
   m_Children:
   - {fileID: 179882381}
   - {fileID: 161029703}
+  - {fileID: 13330478}
   m_Father: {fileID: 298121612}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
