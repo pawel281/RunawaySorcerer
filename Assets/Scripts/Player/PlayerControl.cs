@@ -48,8 +48,4 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        _playerMovement.Move();
-    }
 }

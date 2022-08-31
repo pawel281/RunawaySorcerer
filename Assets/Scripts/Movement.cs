@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -23,7 +24,11 @@ public class Movement : MonoBehaviour
     {
         _speed = Mathf.Clamp(_speed, 0, Mathf.Infinity);
     }
-    
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
 
     public void Move()
     {
@@ -32,6 +37,7 @@ public class Movement : MonoBehaviour
             * Time.fixedDeltaTime);
     }
 
+    
     public void Turn(Vector3 viewDirection)
     {
         if (viewDirection.sqrMagnitude > 0.3f)

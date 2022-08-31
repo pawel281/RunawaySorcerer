@@ -1,11 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class AIStateController : MonoBehaviour
 {
     private State _currentState;
- 
+    private GameObject _target;
+    private void Awake()
+    {
+        throw new NotImplementedException();
+    }
+
     private void RunStateMachine()
     {
         State nextState = _currentState?.RunCurrentState();
@@ -20,7 +24,7 @@ public class AIStateController : MonoBehaviour
         _currentState = nexState;
     }
 
-  private  void Update()
+    private void Update()
     {
         RunStateMachine();
     }

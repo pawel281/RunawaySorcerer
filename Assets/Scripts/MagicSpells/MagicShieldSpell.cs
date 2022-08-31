@@ -4,8 +4,6 @@ public class MagicShieldSpell : MagicSpellBase
 {
     private MagicShield _magicShield;
 
-
-
     public override void Initialize(MagicSpellData data)
     {
         _spellData = Instantiate(data);
@@ -27,6 +25,6 @@ public class MagicShieldSpell : MagicSpellBase
 
     public override void DestroySpell()
     {
-      Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -14,12 +14,31 @@ public abstract class MagicSpellBase : MonoBehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        var spellCollider = GetComponent<Collider>();
+        if (transform.parent&&spellCollider)
+        {
+            Physics.IgnoreCollision(spellCollider, transform.root.GetComponent<Collider>());
+        }
     }
+    
+    public static Color CombineSpellsColors(Color[] aColors)
+    {
+        Color result = new Color(0, 0, 0, 1);
+        foreach (Color c in aColors)
+        {
+            result += c;
+        }
 
+        result /= aColors.Length;
+
+        return result;
+    }
     public abstract void Initialize(MagicSpellData data);
 
     public abstract void Activate();
 
     public abstract void DestroyUnfinishedSpell();
     public abstract void DestroySpell();
+    
+    
 }
