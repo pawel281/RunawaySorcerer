@@ -23,7 +23,7 @@ public class MagicShield : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var spell = other.GetComponent<MagicSpellBase>();
-        if (spell && spell.IsActive)
+        if (spell && spell.IsActive&&spell.StartParent!=transform.root)
         {
             var shieldElement = _shieldElements.FirstOrDefault(i => i.YieldingSpell.Name == spell.SpellData.Name);
             if (shieldElement != null)
@@ -54,7 +54,6 @@ public class MagicShield : MonoBehaviour
     {
         private MagicShield _magicShield;
         private MagicSpellData _yieldingSpell;
-        private bool _isActive;
         private float _shieldHp;
         private float _startShieldHp;
         private Color _color;
@@ -77,8 +76,7 @@ public class MagicShield : MonoBehaviour
             _elementVisual.gameObject.SetActive(true);
             _startShieldHp = data.Life;
             _shieldHp = _startShieldHp;
-            _isActive = true;
-             if (_lifeCycle != null)
+            if (_lifeCycle != null)
              {
                  _magicShield.StopCoroutine(_lifeCycle);
              }
@@ -105,7 +103,6 @@ public class MagicShield : MonoBehaviour
 
             _elementVisual.gameObject.SetActive(false);
             _lifeCycle = null;
-            _isActive = false;
             _magicShield._elementVisual.gameObject.SetActive(false);
         }
     }

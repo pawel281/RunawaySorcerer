@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private SpriteRenderer _bodySprite;
     private Rigidbody _rigidbody;
     private Vector3 movingDirection;
-    
+
     public float Speed => _speed;
     public void ChangeDirection(Vector3 dir) => movingDirection = dir.normalized;
 
@@ -36,14 +36,14 @@ public class Movement : MonoBehaviour
             _speed
             * Time.fixedDeltaTime);
     }
-
     
-    public void Turn(Vector3 viewDirection)
+    public void HandTurn(Vector3 viewDirection)
     {
         if (viewDirection.sqrMagnitude > 0.3f)
         {
             var step = _turnHandSpeed * Time.deltaTime;
-            _handRoot.transform.rotation = Quaternion.RotateTowards( _handRoot.transform.rotation, Quaternion.LookRotation(viewDirection.normalized)*Quaternion.Euler(90,0,0), step);
+            _handRoot.transform.rotation = Quaternion.RotateTowards(_handRoot.transform.rotation,
+                Quaternion.LookRotation(viewDirection.normalized) * Quaternion.Euler(90, 0, 0), step);
             _bodySprite.flipX = viewDirection.x < 0;
         }
     }

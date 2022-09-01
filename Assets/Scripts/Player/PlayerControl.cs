@@ -30,7 +30,7 @@ public class PlayerControl : MonoBehaviour
         _playerMovement.ChangeDirection(moveDirection);
         var handDirection = _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)) - transform.position;
         handDirection.y = 0;
-        _playerMovement.Turn(handDirection);
+        _playerMovement.HandTurn(handDirection);
 
         if (Input.GetMouseButtonDown(1))
         {

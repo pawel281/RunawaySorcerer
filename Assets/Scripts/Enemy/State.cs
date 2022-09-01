@@ -1,19 +1,9 @@
-using System;
 using UnityEngine;
 
-public abstract class State : ScriptableObject
+namespace StateMachine
 {
-    protected Movement _movement;
-    protected GameObject _target;
-
-
-    private void Awake()
+    public abstract class State : MonoBehaviour
     {
-        
+        public abstract State RunCurrentState(AIStateController aiStateController);
     }
-
-    public abstract State RunCurrentState();
-
-   
-
 }

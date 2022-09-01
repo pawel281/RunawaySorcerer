@@ -65,6 +65,7 @@ public class FlyingBall : MagicSpellBase
             else
             {
                 DestroySpell();
+                print(other.transform.name);
             }
         }
     }

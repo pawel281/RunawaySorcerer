@@ -1,31 +1,38 @@
 using System;
 using UnityEngine;
 
-public class AIStateController : MonoBehaviour
+namespace StateMachine
 {
-    private State _currentState;
-    private GameObject _target;
-    private void Awake()
+    public class AIStateController : MonoBehaviour
     {
-        throw new NotImplementedException();
-    }
+        private State _currentState;
+        private Movement _botMovement;//может вынести отдельно
+        private GameObject _target;
 
-    private void RunStateMachine()
-    {
-        State nextState = _currentState?.RunCurrentState();
-        if (nextState)
+        public Movement BotMovement => _botMovement;
+
+        private void Awake()
         {
-            SwitchNextState(nextState);
+//        throw new NotImplementedException();
         }
-    }
 
-    private void SwitchNextState(State nexState)
-    {
-        _currentState = nexState;
-    }
+        private void RunStateMachine()
+        {
+            State nextState = _currentState?.RunCurrentState(this);
+            if (nextState)
+            {
+                SwitchNextState(nextState);
+            }
+        }
 
-    private void Update()
-    {
-        RunStateMachine();
+        private void SwitchNextState(State nexState)
+        {
+            _currentState = nexState;
+        }
+
+        private void Update()
+        {
+            RunStateMachine();
+        }
     }
 }

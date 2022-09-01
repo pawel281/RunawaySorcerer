@@ -1,17 +1,19 @@
 using UnityEngine;
 
-public class Idle : State
+namespace StateMachine
 {
-    [SerializeField] private State _nextState;
-
-    public override State RunCurrentState()
+    public class Idle : State
     {
-        _movement.ChangeDirection(Vector3.zero);
-        return this;
-    }
+        [SerializeField] private State _nextState;
 
-    private void CheckPlayer()
-    {
-        
+        public override State RunCurrentState(AIStateController aiStateController)
+        {
+            aiStateController.BotMovement.ChangeDirection(Vector3.zero);
+            return this;
+        }
+
+        private void SearchTarget()
+        {
+        }
     }
 }
