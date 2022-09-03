@@ -5,16 +5,10 @@ namespace StateMachine
 {
     public class AIStateController : MonoBehaviour
     {
-        private State _currentState;
-        private Movement _botMovement;//может вынести отдельно
-        private GameObject _target;
-
+        [SerializeField] private State _currentState;
+        [SerializeField] private Movement _botMovement; //может вынести отдельно
         public Movement BotMovement => _botMovement;
 
-        private void Awake()
-        {
-//        throw new NotImplementedException();
-        }
 
         private void RunStateMachine()
         {

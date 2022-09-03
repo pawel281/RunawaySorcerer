@@ -20,35 +20,58 @@ public class EnemyCombat : MagicCombatBase
         foreach (var magicElement in spell.Composition)
         {
             yield return new WaitForSeconds(cdElementAdd);
-            if (Random.value < chanceFail)
+            if (Random.value > chanceFail)
             {
                 AddMagicElementToPool(magicElement);
             }
             else
             {
-                _currentSpell?.DestroyUnfinishedSpell();
+                if (_currentSpell)
+                {
+                    _currentSpell.DestroyUnfinishedSpell();
+                }
+
                 break;
             }
         }
+
         yield return new WaitForSeconds(cdAfterCreation);
         _createSpell = null;
     }
 
-    public void StartCreateSpell(float attackShieldMod, float cdElementAdd, float cdAfterCreation, float chanceFail)
+    /// <summary>
+    /// Запускает создание спела и возвращет тру, если создан
+    /// </summary>
+    /// <param name="attackShieldMod"> коэффициент атаки </param>
+    /// <param name="cdElementAdd"> кд добавление элемента</param>
+    /// <param name="cdAfterCreation"> кд задержки после создания</param>
+    /// <param name="chanceFail"> Шансс неудачи</param>
+    /// <returns></returns>
+    public bool StartCreateSpell(float attackShieldMod, float cdElementAdd, float cdAfterCreation, float chanceFail)
     {
-        if (_createSpell == null && !_currentSpell)
+        if (_createSpell == null)
         {
-            MagicSpellData spell;
-            if (Random.value < attackShieldMod)
+            if (!_currentSpell)
             {
-                spell = _attackMagicSpells[Random.Range(0, _attackMagicSpells.Length)];
+                MagicSpellData spell;
+                if (Random.value > attackShieldMod)
+                {
+                    spell = _attackMagicSpells[Random.Range(0, _attackMagicSpells.Length)];
+                }
+                else
+                {
+                    spell = _protectMagicSpells[Random.Range(0, _protectMagicSpells.Length)];
+                }
+
+                _createSpell = StartCoroutine(StartCreateSpellProcess(spell, cdElementAdd, cdAfterCreation, chanceFail));
+                return false;
             }
             else
             {
-                spell = _protectMagicSpells[Random.Range(0, _protectMagicSpells.Length)];
+                return true;
             }
-
-            _createSpell = StartCoroutine(StartCreateSpellProcess(spell, cdElementAdd, cdAfterCreation, chanceFail));
         }
+
+        return false;
     }
 }

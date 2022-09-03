@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         _rigidbody.MovePosition(_rigidbody.position + movingDirection.normalized *
             _speed

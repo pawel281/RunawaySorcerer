@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
     [SerializeField] private float _hp;
     private float _startHp;
@@ -15,15 +15,17 @@ public class Health : MonoBehaviour
         _startHp = _hp;
     }
 
+    protected abstract void OnDead();
 
     private void OnCollisionEnter(Collision other)
     {
         var magicSpell = other.transform.GetComponent<MagicSpellBase>();
         if (magicSpell)
         {
-            ChangeHp(_hp-magicSpell.SpellData.Damage);  
+            ChangeHp(_hp - magicSpell.SpellData.Damage);
         }
     }
+
 
     public void ChangeHp(float hp)
     {
@@ -31,12 +33,7 @@ public class Health : MonoBehaviour
         OnChangeHp?.Invoke();
         if (_hp <= 0)
         {
-           GetComponent<IDead>()?.OnDead();
+            OnDead();
         }
     }
-}
-
-interface IDead
-{
-    void OnDead();
 }

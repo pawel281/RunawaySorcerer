@@ -41,7 +41,11 @@ public class MagicCombatBase : MonoBehaviour
     protected void CreateSpell()
     {
         var spell = CheckOverlapSpell();
-        _currentSpell?.DestroyUnfinishedSpell();
+        if (_currentSpell)
+        {
+            _currentSpell.DestroyUnfinishedSpell();
+        }
+
         if (spell)
         {
             if (_poolElements.Count == spell.Composition.Length)

@@ -27,7 +27,6 @@ namespace StateMachine
                 else
                 {
                     _movement.ChangeDirection(nextPos - transform.position);
-                    _movement.Move();
                 }
 
                 return false;
