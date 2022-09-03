@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextState: {fileID: 1887395924301440221}
-  _radiusRandomPosition: 3
+  _radiusRandomPosition: 6
 --- !u!1 &1887395924515087001
 GameObject:
   m_ObjectHideFlags: 0
