@@ -1,9 +1,14 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class PlayerCombat : MagicCombatBase
 {
   
     private CreateSpellUISelector _spellUiSelector;
+    [SerializeReference] private Test[] test;
+    [SerializeReference]Dictionary<string,string> test2=new Dictionary<string, string>();
     [Inject]
     private void Constructor(CreateSpellUISelector spellUiSelector)
     {
@@ -19,5 +24,19 @@ public class PlayerCombat : MagicCombatBase
     }
 
 
+    
 
+}
+
+interface Test
+{
+    void Test();
+}
+[Serializable]
+class  Test1: MonoBehaviour,Test
+{
+    public void Test()
+    {
+        throw new System.NotImplementedException();
+    }
 }
